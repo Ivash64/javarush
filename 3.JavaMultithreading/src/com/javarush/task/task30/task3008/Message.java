@@ -1,0 +1,30 @@
+package com.javarush.task.task30.task3008;
+
+import java.io.Serializable;
+
+/**
+ * @author Ivanov
+ * @since 27.04.2018.
+ */
+public class Message implements Serializable {
+  final private MessageType type;
+  final private String data;
+
+  public Message(MessageType type) {
+    this.type = type;
+    data = null;
+  }
+
+  public Message(MessageType type, String data) {
+    this.type = type;
+    this.data = data;
+  }
+
+  public MessageType getType() {
+    return type;
+  }
+
+  public String getData() {
+    return data;
+  }
+}
