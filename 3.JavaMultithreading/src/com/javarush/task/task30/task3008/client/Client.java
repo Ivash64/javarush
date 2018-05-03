@@ -23,7 +23,7 @@ public class Client {
   public void run() {
     SocketThread socketThread = getSocketThread();
     socketThread.setDaemon(true);
-    socketThread.run();
+    socketThread.start();
     synchronized (Client.this) {
       try {
         wait();
@@ -35,11 +35,9 @@ public class Client {
     if (clientConnected) {
       ConsoleHelper.writeMessage("Соединение установлено. Для выхода наберите команду 'exit'.");
       while (clientConnected) {
-        String mes = ConsoleHelper.readString();
-        if ("exit".equals(mes))
-          break;
-        if (shouldSendTextFromConsole())
-          sendTextMessage(mes);
+        String line;
+        if ((line = ConsoleHelper.readString()).equalsIgnoreCase("exit")) break;
+        else if (shouldSendTextFromConsole()) sendTextMessage(line);
       }
     } else
       ConsoleHelper.writeMessage("Произошла ошибка во время работы клиента.");
